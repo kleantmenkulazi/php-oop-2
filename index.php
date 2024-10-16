@@ -14,71 +14,79 @@ class Product {
     public $title;
     public $price;
     public $img;
-    protected $category;
-    protected $isFood;
-    protected $isToy;
-    protected $isPetBed;
+    // protected $category;
+    // protected $isFood;
+    // protected $isToy;
+    // protected $isPetBed;
 
 function _construct(string $title,float $price,string $img, Category|null $category = null) {
     $this->title = $title;
     $this->price = $price;
     $this->img = $img;
-$this->setCategory($category);
+    $this->setCategory($category);
 }
 
 public function getCategory() {
     return $this->category;
 }
-public function getType() {
-    if($this->isFood) {
-        return 'food';
-    }
-    else if($this->isToy) {
-        return 'toy';
-    }
-    else if($this->isPetbed) {
-        return 'petBed';
+
+public function setCategory(Category|null $category) {
+    $this->category = $category;
+}
+
+
+ /* public function getType() {
+    return $this->type;
+} 
+public function setType(string $type) {
+    $types = [
+        'food',
+        'tiy',
+        'petBed',
+    ];
+    
+    if (in_array($type, $types)) {
+        $this->type = $type;
     }
     else {
-        return null;
+        $this->type = null;
+    }
+} */
+
+}
+
+
+class Food extends Product {
+    public $ingredients;
+    
+    function _construct(string $title,float $price,string $img, Category|null $category = null, string $ingredients = null) {
+        parent:: _construct($title, $price, $img, $category);
+
+        $this->ingredients = $ingredients;
     }
 }
-public function setType(string $type) {
-    if($type == 'food') {
-        $this->isFood = true;
-        $this->isToy = false;
-        $this->isPetBed = false;
+class Toy extends Product {
+    public $materials;
+
+    function _construct(string $title,float $price,string $img, Category|null $category = null, string $materials = null) {
+        parent:: _construct($title, $price, $img, $category);
+
+        $this->imaterial = $material;
     }
-    else if($type == 'toy') {
-        $this->isFood = false;
-        $this->isToy = true;
-        $this->isPetBed = false;
-    }
-    else if($type == 'petBed') {
-        $this->isFood = false;
-        $this->isToy = false;
-        $this->isPetBed = true;
-    }
-    else {
-        $this->isFood = false;
-        $this->isToy = false;
-        $this->isPetBed = false;
+}
+class PetBed extends Product {
+    public $size;
+
+    function _construct(string $title,float $price,string $img, Category|null $category = null, string $size = null) {
+        parent:: _construct($title, $price, $img, $category);
+
+        $this->size = $size;
     }
 }
 
-/* public function setCategory(Category|null $category) {
-    if (
-        is_string($category)
-        &&
-        in_array($category,$categories)
-    ) {
-        $this->category = $category;
-    }
-    else {
-        $this->category = null;
-    } 
-} */
-}
+
+
+
 $cani = new Category('Cani', '🐶');
 $gatti = new Category('Gatti', '🐈');
 
@@ -92,6 +100,35 @@ $prodottoPerGatti = new Product(
     $gatti
 );
 var_dump($prodottoPerGatti);
+
+$ciboPerGatti = new Food(
+    'Cibo per gatti',
+    6.99,
+    'https://i5.walmartimages.com/seo/Meow-Mix-Original-Choice-Dry-Cat-Food-30-Pounds_c6ce8dad-9f70-4368-a3a0-64d1c9730fd6.6e4cf26663f507ba903d633a8e44cb08.jpeg'
+    $gatti,
+    'Manzo, piselli, carote, sale, olio, acqua'
+);
+var_dump($ciboPerGatti);
+
+$giocoPerGatti = new Toy(
+    'Gioco per gatti',
+    2.99,
+    'https://m.media-amazon.com/images/I/51vCVq-lnCL._AC_UF894,1000_QL80_.jpg'
+    $gatti,
+    'Plastica'
+);
+var_dump($giocoPerGatti);
+
+$cucciaPerGatti = new PetBed(
+    'Cuccia per gatti',
+    14.99,
+    'https://m.media-amazon.com/images/I/71fIDIyxppL._AC_UF1000,1000_QL80_.jpg'
+    $gatti,
+    'medium'
+);
+var_dump($cucciaPerGatti);
+
+
 
 
 
