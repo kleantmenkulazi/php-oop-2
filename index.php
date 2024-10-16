@@ -1,6 +1,12 @@
 <?php
 
+
+
 class Product {
+    public $title;
+    public $price;
+    public $img;
+    protected $category;
 
 protected $category; {
 $this->setCategory($category);
@@ -11,14 +17,18 @@ public function getCategory() {
 }
 
 public function setCategory($category) {
+    $categories = [
+        'Cani',
+        'Gatti',
+        'Pappagalli',
+        'Iguane',
+        'Coccodrilli',
+    ];
+
     if (
         is_string($category)
         &&
-        (
-            $category == 'Cani'
-            ||
-            $category == 'Gatti'
-        )
+        in_array($category,$categories)
     ) {
         $this->category = $category;
     }
