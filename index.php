@@ -54,33 +54,42 @@ public function setType(string $type) {
 } */
 
 }
+trait Brand {
+    public string $brand;
+}
 
 
 class Food extends Product {
     public $ingredients;
+    use Brand;
     
-    function _construct(string $title,float $price,string $img, Category|null $category = null, string $ingredients = null) {
+    function _construct(string $title,float $price,string $img, Category|null $category = null, string $ingredients = null, $brand) {
         parent:: _construct($title, $price, $img, $category);
 
         $this->ingredients = $ingredients;
+        $this->brand = $brand;
     }
 }
 class Toy extends Product {
     public $materials;
+    use Brand;
 
-    function _construct(string $title,float $price,string $img, Category|null $category = null, string $materials = null) {
+    function _construct(string $title,float $price,string $img, Category|null $category = null, string $materials = null, $brand) {
         parent:: _construct($title, $price, $img, $category);
 
         $this->imaterial = $material;
+        $this->brand = $brand;
     }
 }
 class PetBed extends Product {
     public $size;
+    use Brand;
 
-    function _construct(string $title,float $price,string $img, Category|null $category = null, string $size = null) {
+    function _construct(string $title,float $price,string $img, Category|null $category = null, string $size = null, $brand) {
         parent:: _construct($title, $price, $img, $category);
 
         $this->size = $size;
+        $this->brand = $brand;
     }
 }
 
@@ -233,6 +242,9 @@ $products = [
                                     
                                     ?>
                                 </h3>
+                                <span>
+                                <?php echo $product->brand; ?>
+                                </span>
                                 </div>
                             </div>
                         </div>
