@@ -2,8 +2,30 @@
 
 class Product {
 
+protected $category; {
+$this->setCategory($category);
+}
 
-    
+public function getCategory() {
+    return $this->category;
+}
+
+public function setCategory($category) {
+    if (
+        is_string($category)
+        &&
+        (
+            $category == 'Cani'
+            ||
+            $category == 'Gatti'
+        )
+    ) {
+        $this->category = $category;
+    }
+    else {
+        $this->category = null;
+    }
+}
 }
 
 
