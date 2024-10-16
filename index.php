@@ -15,6 +15,9 @@ class Product {
     public $price;
     public $img;
     protected $category;
+    protected $isFood;
+    protected $isToy;
+    protected $isPetBed;
 
 function _construct(string $title,float $price,string $img, Category|null $category = null) {
     $this->title = $title;
@@ -25,6 +28,42 @@ $this->setCategory($category);
 
 public function getCategory() {
     return $this->category;
+}
+public function getType() {
+    if($this->isFood) {
+        return 'food';
+    }
+    else if($this->isToy) {
+        return 'toy';
+    }
+    else if($this->isPetbed) {
+        return 'petBed';
+    }
+    else {
+        return null;
+    }
+}
+public function setType(string $type) {
+    if($type == 'food') {
+        $this->isFood = true;
+        $this->isToy = false;
+        $this->isPetBed = false;
+    }
+    else if($type == 'toy') {
+        $this->isFood = false;
+        $this->isToy = true;
+        $this->isPetBed = false;
+    }
+    else if($type == 'petBed') {
+        $this->isFood = false;
+        $this->isToy = false;
+        $this->isPetBed = true;
+    }
+    else {
+        $this->isFood = false;
+        $this->isToy = false;
+        $this->isPetBed = false;
+    }
 }
 
 /* public function setCategory(Category|null $category) {
